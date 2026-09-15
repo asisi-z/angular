@@ -1,0 +1,66 @@
+<div class="login-screen">
+        
+       
+        <div class="left-side">
+            <img src="../Desafio-Angular/public/img/ranger.png" alt="Ford Ranger">
+        </div>
+        
+        
+        <div class="right-side">
+            <div class="login-box">
+                
+                <img src="../Desafio-Angular/public/img/logo.png" class="logo" alt="Ford Logo">
+                
+                <h2>Boas-vindas</h2>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <span class="icon">👤</span>
+                        <input type="text" id="username" placeholder="Insira seu e-mail ou usuário" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <span class="icon">🔒</span>
+                        <input type="password" id="password" placeholder="Insira sua senha" required>
+                    </div>
+
+                    <div class="remember-me">
+                        <label>Logar automaticamente</label>
+                        <input type="checkbox" id="toggle-switch">
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Entrar</button>
+                </form>
+
+                <div id="feedbackMessage" class="message"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const usuarioInput = document.getElementById('username').value;
+            const senhaInput = document.getElementById('password').value;
+            const feedback = document.getElementById('feedbackMessage');
+
+            const credenciaisValidas = {
+                usuario: "admin",
+                senha: "123456"
+            };
+
+            if (usuarioInput === credenciaisValidas.usuario && senhaInput === credenciaisValidas.senha) {
+                feedback.textContent = "Autenticação realizada com sucesso! Redirecionando...";
+                feedback.className = "message success";
+                
+                
+                window.location.assign("home.html");
+            } else {
+                feedback.textContent = "Usuário ou senha incorretos.";
+                feedback.className = "message error";
+            }
+        });
+    </script>
+

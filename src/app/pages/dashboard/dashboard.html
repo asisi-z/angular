@@ -1,0 +1,189 @@
+ <div class="dashboard-container">
+        
+        
+        <aside class="sidebar">
+            <img src="../Desafio-Angular/public/img/logo.png" class="sidebar-logo" alt="Ford Logo">
+            <nav class="menu">
+                <a href="home.html">Home</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="login.html" class="logout-btn">Sair (Logout)</a>
+            </nav>
+        </aside>
+
+        
+        <main class="main-content">
+            <h1 class="dash-title">Dashboard FORD</h1>
+
+            
+            <section class="cards-grid">
+            
+                <div class="card card-select">
+                    <label for="vehicleSelect">Veículo</label>
+                    <select id="vehicleSelect">
+                        <option value="">Selecione...</option>
+                      
+                    </select>
+                </div>
+
+                
+                <div class="card stat-card">
+                    <span class="card-label">Total de Vendas</span>
+                    <span id="totalVendas" class="card-value">-</span>
+                    <span class="card-unit">unid</span>
+                </div>
+
+                <div class="card stat-card">
+                    <span class="card-label">Conectados</span>
+                    <span id="conectados" class="card-value">-</span>
+                    <span class="card-unit">unid</span>
+                </div>
+
+                <div class="card stat-card">
+                    <span class="card-label">Update Software</span>
+                    <span id="updateSoftware" class="card-value">-</span>
+                    <span class="card-unit">unid</span>
+                </div>
+            </section>
+
+            
+            <section class="vehicle-display">
+                <img id="vehicleImage" src="" alt="Selecione um veículo" class="car-img hidden">
+            </section>
+
+            
+            <section class="table-section">
+                <div class="table-header">
+                    <div class="search-box">
+                        <label for="vinSearch">Código / Vin</label>
+                        <input type="text" id="vinSearch" placeholder="Ex: 2FRHDUYS2Y63NHD22454">
+                    </div>
+                </div>
+
+                
+                <table class="ford-table">
+                    <thead>
+                        <tr>
+                            <th>Odômetro</th>
+                            <th>Nível de Combustível</th>
+                            <th>Status</th>
+                            <th>Lat.</th>
+                            <th>Long.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="tdOdom">-</td>
+                            <td id="tdCombustivel">-</td>
+                            <td id="tdStatus">-</td>
+                            <td id="tdLat">-</td>
+                            <td id="tdLong">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    
+    <script>
+        const vehicleSelect = document.getElementById('vehicleSelect');
+        const vehicleImage = document.getElementById('vehicleImage');
+        const totalVendas = document.getElementById('totalVendas');
+        const conectados = document.getElementById('conectados');
+        const updateSoftware = document.getElementById('updateSoftware');
+        const vinSearch = document.getElementById('vinSearch');
+
+        
+        const tdOdom = document.getElementById('tdOdom');
+        const tdCombustivel = document.getElementById('tdCombustivel');
+        const tdStatus = document.getElementById('tdStatus');
+        const tdLat = document.getElementById('tdLat');
+        const tdLong = document.getElementById('tdLong');
+
+        // 
+        async function carregarVeiculos() {
+            try {
+                const response = await fetch('http://localhost:3000/vehicle');
+                const veiculos = await response.json();
+                
+                veiculos.forEach(veiculo => {
+                    const option = document.createElement('option');
+                    option.value = veiculo.id;  
+                    option.textContent = veiculo.modelo; 
+                    vehicleSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar veículos:", error);
+               
+                const mock = ['Ranger', 'Mustang', 'Territory', 'Bronco Sport'];
+                mock.forEach(m => {
+                    const option = document.createElement('option');
+                    option.value = m.toLowerCase();
+                    option.textContent = m;
+                    vehicleSelect.appendChild(option);
+                });
+            }
+        }
+
+       
+        vehicleSelect.addEventListener('change', async function() {
+            const modelo = this.value;
+            if(!modelo) return resetDashboard();
+
+            try {
+               
+                const response = await fetch(`http://localhost:3000/vehicle/${modelo}`);
+                const data = await response.json();
+
+                totalVendas.textContent = data.totalVendas;
+                conectados.textContent = data.conectados;
+                updateSoftware.textContent = data.updateSoftware;
+                
+              
+                vehicleImage.src = `img/${data.imagem}`; 
+                vehicleImage.classList.remove('hidden');
+            } catch (error) {
+               
+                vehicleImage.classList.remove('hidden');
+                if(modelo === 'mustang') {
+                    totalVendas.textContent = '1500'; conectados.textContent = '500'; updateSoftware.textContent = '750';
+                    vehicleImage.src = '../Desafio-Angular/public/img/mustang.png'; // Garanta que tenha um mustang.png se quiser testar offline
+                } else if(modelo === 'territory') {
+                    totalVendas.textContent = '4560'; conectados.textContent = '600'; updateSoftware.textContent = '3000';
+                    vehicleImage.src = '../Desafio-Angular/public/img/territory.png';
+                } else {
+                    totalVendas.textContent = '1200'; conectados.textContent = '450'; updateSoftware.textContent = '900';
+                    vehicleImage.src = '../Desafio-Angular/public/img/ranger.png';
+                }
+            }
+        });
+        vinSearch.addEventListener('input', async function() {
+            const vinCodigo = this.value.trim();
+            if(vinCodigo.length < 5) return; 
+
+            try {
+                const response = await fetch(`http://localhost:3000/vehicleData?vin=${vinCodigo}`);
+                const data = await response.json();
+
+            
+                tdOdom.textContent = data.odometro + " km";
+                tdCombustivel.textContent = data.combustivel + "%";
+                tdStatus.textContent = data.status;
+                tdLat.textContent = data.latitude;
+                tdLong.textContent = data.longitude;
+            } catch (error) {
+                
+                if(vinCodigo === '2FRHDUYS2Y63NHD22454') {
+                    tdOdom.textContent = '32000 km'; tdCombustivel.textContent = '85%'; 
+                    tdStatus.textContent = 'ok'; tdLat.textContent = '-12.9711'; tdLong.textContent = '-38.5114';
+                }
+            }
+        });
+
+        function resetDashboard() {
+            totalVendas.textContent = '-'; conectados.textContent = '-'; updateSoftware.textContent = '-';
+            vehicleImage.classList.add('hidden');
+        }
+
+        carregarVeiculos();
+    </script>
