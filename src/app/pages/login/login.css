@@ -124,7 +124,7 @@ h2 {
 
 .main-content {
     flex: 1;
-    background-image: url('./img/ranger.png'); 
+    background-image: url('../../../../public/img/ranger.png'); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

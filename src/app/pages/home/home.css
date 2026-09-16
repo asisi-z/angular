@@ -68,7 +68,7 @@ body {
 
 .main-content {
     flex: 1;
-    background-image: url('ranger.png'); 
+    background-image: url('../../../../public/img/ranger.png'); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -104,7 +104,7 @@ body {
 
 .main-content {
     flex: 1;
-    background-image: url('../Desafio-Angular/public/img/ranger.png'); 
+    background-image: url('../../../../public/img/ranger.png'); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

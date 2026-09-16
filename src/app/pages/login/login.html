@@ -16,12 +16,12 @@
                 <form #loginForm="ngForm" (ngSubmit)="login()">
                     <div class="input-group">
                         <span class="icon">👤</span>
-                        <input type="text" [(ngModel)]="usuario.nome" id="username" placeholder="Insira seu e-mail ou usuário" required>
+                        <input type="text" [(ngModel)]="usuario.nome" name="nome" id="username" placeholder="Insira seu e-mail ou usuário" required>
                     </div>
                     
                     <div class="input-group">
                         <span class="icon">🔒</span>
-                        <input type="password" id="password" placeholder="Insira sua senha" required>
+                        <input type="password" [(ngModel)]="usuario.senha" name="senha" id="password" placeholder="Insira sua senha" required>
                     </div>
 
                     <div class="remember-me">

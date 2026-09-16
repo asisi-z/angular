@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Auth } from '../../services/auth'; 
-import { Router } from '@angular/router'; 
-import { CommonModule } from '@angular/common'; 
+import { Auth } from '../../services/auth';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,22 +12,22 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class Login {
-usuario = { 
-nome: '',
-senha: '' 
-} 
-mensagemDeErro: String | null = null; 
-constructor(private auth: Auth, private router: Router) {} 
+  usuario = {
+    nome: '',
+    senha: ''
+  }
+  mensagemDeErro: String | null = null;
+  constructor(private auth: Auth, private router: Router) { }
 
-login() { 
+  login() {
 
-this.auth.login(this.usuario).subscribe({ 
-next: response => { 
-this.router.navigate(['/home']); 
-}, error: (err) => { 
-this.mensagemDeErro = err.error.message || 'Ocorreu um erro ao tentar fazer login.'; 
-} 
-}) 
-} 
+    this.auth.login(this.usuario).subscribe({
+      next: response => {
+        this.router.navigate(['/home']);
+      }, error: (err) => {
+        this.mensagemDeErro = err.error.message || 'Ocorreu um erro ao tentar fazer login.';
+      }
+    })
+  }
 }
 
