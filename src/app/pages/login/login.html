@@ -2,21 +2,21 @@
         
        
         <div class="left-side">
-            <img src="../Desafio-Angular/public/img/ranger.png" alt="Ford Ranger">
+            <img src="img/ranger.png" alt="Ford Ranger">
         </div>
         
         
         <div class="right-side">
             <div class="login-box">
                 
-                <img src="../Desafio-Angular/public/img/logo.png" class="logo" alt="Ford Logo">
+                <img src="img/logo.png" class="logo" alt="Ford Logo">
                 
                 <h2>Boas-vindas</h2>
                 
-                <form id="loginForm">
+                <form #loginForm="ngForm" (ngSubmit)="login()">
                     <div class="input-group">
                         <span class="icon">👤</span>
-                        <input type="text" id="username" placeholder="Insira seu e-mail ou usuário" required>
+                        <input type="text" [(ngModel)]="usuario.nome" id="username" placeholder="Insira seu e-mail ou usuário" required>
                     </div>
                     
                     <div class="input-group">

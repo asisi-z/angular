@@ -1,10 +1,8 @@
-<app-menu></app-menu>
-
 <div class="dashboard-container">
-        
-        
+ <app-menu></app-menu>
+      
         <aside class="sidebar">
-            <img src="../Desafio-Angular/public/img/logo.png" class="sidebar-logo" alt="Ford Logo">
+            <img src="img/logo.png" class="sidebar-logo" alt="Ford Logo">
             <nav class="menu">
                 <a href="home.html">Home</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
@@ -149,13 +147,13 @@
                 vehicleImage.classList.remove('hidden');
                 if(modelo === 'mustang') {
                     totalVendas.textContent = '1500'; conectados.textContent = '500'; updateSoftware.textContent = '750';
-                    vehicleImage.src = '../Desafio-Angular/public/img/mustang.png'; // Garanta que tenha um mustang.png se quiser testar offline
+                    vehicleImage.src = 'img/mustang.png'; // Garanta que tenha um mustang.png se quiser testar offline
                 } else if(modelo === 'territory') {
                     totalVendas.textContent = '4560'; conectados.textContent = '600'; updateSoftware.textContent = '3000';
-                    vehicleImage.src = '../Desafio-Angular/public/img/territory.png';
+                    vehicleImage.src = 'img/territory.png';
                 } else {
                     totalVendas.textContent = '1200'; conectados.textContent = '450'; updateSoftware.textContent = '900';
-                    vehicleImage.src = '../Desafio-Angular/public/img/ranger.png';
+                    vehicleImage.src = 'img/ranger.png';
                 }
             }
         });
