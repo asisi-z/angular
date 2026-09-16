@@ -1,10 +1,9 @@
-<nav class="menu"> 
-    <a href="home.html">Home</a> 
-    <a href="dashboard.html" class="active">Dashboard</a> 
-    <a href="login.html" class="logout-btn">Sair (Logout)</a> 
-</nav>
-
-
-<a href="home.html">
+<a routerLink="/home">
     <img src="img/logo.png" class="sidebar-logo" alt="Ford Logo">
 </a>
+
+<nav class="menu"> 
+    <a routerLink="/home">Home</a> 
+    <a routerLink="/dashboard" class="active">Dashboard</a> 
+    <a routerLink="/login" (click)="logout()" class="logout-btn">Sair (Logout)</a> 
+</nav>

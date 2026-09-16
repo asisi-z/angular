@@ -156,17 +156,37 @@ body {
 
 .table-section {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
 }
 
-.table-header {
+th.table-search-cell {
     background-color: #004b87; 
     padding: 12px 20px;
+    text-align: left;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
+.table-heading-line {
+    display: grid;
+    grid-template-columns: 360px repeat(5, minmax(108px, 1fr));
+    align-items: center;
+    gap: 16px;
+    min-width: 900px;
+    color: #ffffff;
+    font-size: 13px;
+    text-align: left;
+}
+
+.table-heading-line > span {
+    font-weight: 600;
+}
+
 .search-box {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 15px;
 }
@@ -175,6 +195,12 @@ body {
     color: #ffffff;
     font-size: 13px;
     white-space: nowrap;
+}
+
+.vin-message {
+    color: #ffffff;
+    font-size: 12px;
+    margin-top: 8px;
 }
 
 .search-box input {
@@ -189,6 +215,8 @@ body {
 
 .ford-table {
     width: 100%;
+    min-width: 900px;
+    table-layout: fixed;
     border-collapse: collapse;
     font-size: 13px;
 }
@@ -209,7 +237,100 @@ body {
     background-color: #ffffff;
 }
 
+.ford-table .vin-column {
+    width: 360px;
+}
+
+.ford-table .vin-data-spacer {
+    background-color: #ffffff;
+}
+
 
 .ford-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        display: block;
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .dashboard-container > .sidebar {
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 12px 16px;
+    }
+
+    .dashboard-container > .sidebar .sidebar-logo {
+        width: 82px;
+        margin-bottom: 16px;
+    }
+
+    .dashboard-container > .sidebar .menu {
+        width: 100%;
+        gap: 4px;
+    }
+
+    .dashboard-container > .sidebar .menu a {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .dashboard-container > .sidebar .menu a.logout-btn {
+        margin-top: 8px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 24px 16px;
+        overflow-x: hidden;
+    }
+
+    .dash-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .vehicle-display {
+        min-height: 160px;
+        margin-bottom: 24px;
+    }
+
+    .car-img {
+        max-width: 100%;
+        max-height: 150px;
+    }
+
+    th.table-search-cell {
+        padding: 12px 14px;
+    }
+
+    .search-box {
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .ford-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .ford-table th,
+    .ford-table td {
+        padding: 10px 14px;
+    }
 }
